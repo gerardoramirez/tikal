@@ -8,7 +8,10 @@ It is a reusable framework and template repository to manage the instructions, w
 
 ## 📂 Repository Structure
 
-- **`CLAUDE.md`** - Entrypoint file that redirects the AI coding assistant to the correct instructions inside `ai-coding-tools/`.
+- **`CLAUDE.md`** - Entrypoint for **Claude Code** (Anthropic) — redirects to `ai-coding-tools/processes/getting-started.md`.
+- **`.cursor/rules/tikal.mdc`** - Entrypoint for **Cursor** — points to the same instructions using Cursor's MDC rule format.
+- **`.github/copilot-instructions.md`** - Entrypoint for **GitHub Copilot** — points to the shared instructions.
+- **`.windsurfrules`** - Entrypoint for **Windsurf** (Codeium) — points to the shared instructions.
 - **`ai-coding-tools/`**
   - **`processes/`**
     - **`getting-started.md`** - Codebase-specific details (build commands, linting, architecture, directory layouts). Customize this for each project.

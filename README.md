@@ -1,4 +1,4 @@
-# Tikal 🛕
+# Tikal
 
 > **Tikal** provides structural alignment, guardrails, and telemetry for AI coding agents.
 

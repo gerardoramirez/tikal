@@ -14,7 +14,9 @@ flutter test --coverage
 flutter run
 ```
 
-Code generation (only when the project already uses it):
+Code generation — run **only** if the repo already has `build_runner`
+(or a similar generator) and you changed an annotated type. Skip this
+when serialization is handwritten.
 
 ```bash
 dart run build_runner build --delete-conflicting-outputs

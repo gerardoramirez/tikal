@@ -29,10 +29,16 @@ file/widget names, not generic advice.
 
 ## Architecture fit
 
-- Follow the state-management library already in `pubspec.yaml`. Do not add
-  a second one (no Bloc in a Riverpod app, and the reverse).
-- Keep widgets presentational when logic already lives in a notifier/bloc/
-  controller. Do not dump new business rules into `build`.
+- Follow the state style this app already uses (`tikal.project.md` and
+  neighboring features win over `pubspec.yaml`). `ValueNotifier`,
+  `ChangeNotifier`, `setState`, and singleton modules count. Do not add
+  Bloc, Riverpod, or Provider to an app that does not already have one.
+- Keep the existing feature layers. If `domain/` is pure Dart, do not
+  import Flutter or Firebase there.
+- Keep widgets presentational when logic already lives in a notifier,
+  module, or controller. Do not dump new business rules into `build`.
+- If `tikal.project.md` defines offline-first: the UI save path must not
+  await remote sync after the local write. Flag that as a defect.
 - Platform channels, flavors, and dart-defines: match existing naming and
   entrypoints (`main_dev.dart`, `--flavor`, etc.).
 

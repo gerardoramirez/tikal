@@ -1,0 +1,13 @@
+---
+description: Astro content-site review — attach when Astro or Markdown files are in play
+globs: **/*.{astro,md,mdx}
+alwaysApply: false
+---
+
+This project enables the Astro stack (`tikal.yaml` → `project.types`).
+Astro always loads the TypeScript stack as well.
+
+Follow @ai-coding-tools/stacks/astro/index.md. Use the review checklist in
+@ai-coding-tools/stacks/astro/review.md when analyzing or changing pages,
+layouts, or content collections. Run `astro check` and `astro build` after
+edits.

@@ -1,0 +1,8 @@
+# Copy to the consuming repo root as tikal.yaml (not inside the submodule).
+# Agents load only the stacks listed here.
+project:
+  name: my_app
+  types:
+    - astro
+    # or: flutter | typescript
+    # astro always loads the typescript stack as well

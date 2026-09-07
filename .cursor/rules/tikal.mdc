@@ -1,6 +1,6 @@
 ---
-description: Tikal project rules for Cursor
+description: Tikal router — load only the stacks listed in tikal.yaml
 alwaysApply: true
 ---
 
-Refer to @ai-coding-tools/processes/getting-started.md for build commands, repository structure, and instructions.
+Read `tikal.yaml` (or `.tikal.yaml`) at the repository root, then follow @ai-coding-tools/processes/getting-started.md. Load only `ai-coding-tools/stacks/<type>/` for each entry in `project.types` and that type's implied bases (`astro` always loads `typescript`). Do not load other stacks.

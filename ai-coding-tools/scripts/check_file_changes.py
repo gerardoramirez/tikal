@@ -8,13 +8,8 @@ import hashlib
 import json
 import os
 import pathlib
-import sys
 
-# Glob patterns for files to track, relative to project root
-TRACKED_PATTERNS = [
-    "CLAUDE.md",
-    "ai-coding-tools/processes/*.md",
-]
+from resolve_stack import project_root, tracked_patterns
 
 STATE_FILE = ".ai-data/.file_checksums"
 
@@ -28,11 +23,9 @@ def sha256(path):
 
 
 def main():
-    project_dir = os.environ.get(
-        "CLAUDE_PROJECT_DIR",
-        pathlib.Path(__file__).resolve().parent.parent.parent,
-    )
-    root = pathlib.Path(project_dir)
+    env_root = os.environ.get("CLAUDE_PROJECT_DIR")
+    root = project_root(pathlib.Path(env_root) if env_root else None)
+    TRACKED_PATTERNS = tracked_patterns(root)
     state_path = root / STATE_FILE
 
     # Load previous checksums

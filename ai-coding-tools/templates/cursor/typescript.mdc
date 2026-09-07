@@ -1,0 +1,12 @@
+---
+description: TypeScript review — attach when TS/TSX files are in play
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+This project enables the TypeScript stack (`tikal.yaml` → `project.types`,
+or implied by `astro`).
+
+Follow @ai-coding-tools/stacks/typescript/index.md. Use the review checklist
+in @ai-coding-tools/stacks/typescript/review.md when analyzing or changing
+TypeScript. Run `tsc --noEmit` (or the repo's typecheck script) after edits.

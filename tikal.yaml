@@ -1,0 +1,5 @@
+# Tikal is the framework itself, not an application stack.
+# Empty types keeps Flutter (and future) packs out of this repo's agent context.
+project:
+  name: tikal
+  types: []

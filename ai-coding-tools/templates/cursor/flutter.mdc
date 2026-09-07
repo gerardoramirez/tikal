@@ -1,0 +1,11 @@
+---
+description: Flutter review and analysis — attach when Dart files are in play
+globs: **/*.{dart}
+alwaysApply: false
+---
+
+This project enables the Flutter stack (`tikal.yaml` → `project.types`).
+
+Follow @ai-coding-tools/stacks/flutter/index.md. Use the review checklist in
+@ai-coding-tools/stacks/flutter/review.md when analyzing or changing Dart/Flutter
+code. Run `flutter analyze` and the relevant tests after edits.

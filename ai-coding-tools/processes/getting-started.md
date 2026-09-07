@@ -1,80 +1,45 @@
-# General Info about this Repo
+# Tikal Context Router
 
-This file provides guidance to Claude Code (claude.ai/code) and other AI coding assistants when working with code in this repository.
+Load only the docs that match this repository. Do not open other stacks.
 
-## Project Overview
+## 1. Resolve the project type
 
-Provide a brief overview of the project here:
-- **Project Name:** <Project Name>
-- **Description:** <Description of the project's purpose and functionality>
-- **Target Runtime/Language:** <e.g., Python 3.12+, Node.js 20+, Rust, Go, etc.>
+1. Read `tikal.yaml` at the repository root (also accept `.tikal.yaml` or `tikal.json`).
+2. `project.types` is the allow-list. Example: `types: [flutter]` or `types: [astro]`.
+3. Expand implied bases before loading. `astro` always includes `typescript`.
+   Confirm with `python3 ai-coding-tools/scripts/resolve_stack.py` — use the
+   expanded `types` list, not only the raw YAML.
+4. If the config is missing, infer types:
+   - `pubspec.yaml` with a top-level `flutter:` key → `flutter`
+   - `astro.config.mjs` / `.ts` / `.js` → `astro` (implies `typescript`)
+   - `tsconfig.json` → `typescript`
+   - otherwise no stack — ask the user to add `tikal.yaml`
 
-## Build System and Development Commands
+## 2. Load these files — and only these
 
-### Basic Build/Install Process
+| File | When |
+|---|---|
+| `tikal.project.md` | If it exists. Project-specific overview (commands, layout, architecture). |
+| `ai-coding-tools/processes/rules-of-engagement.md` | Always. Communication and code-style guardrails. |
+| `ai-coding-tools/stacks/<type>/index.md` then the files it lists | For **each** type in the **expanded** list that has a stack directory. |
+
+Do **not** read `ai-coding-tools/stacks/*` entries that are not in the
+expanded type list.
+
+Optional process files — open only when the user is doing that work:
+
+- `ai-coding-tools/processes/refactoring.md` — production TDD refactor
+- `ai-coding-tools/processes/benchmarking.md` — speed work
+- `ai-coding-tools/design-principles.md` — shared design rules
+
+## 3. If this is a new checkout
+
 ```bash
-# Provide the commands to install dependencies and build the project, for example:
-npm install
-npm run build
-# or
-pip install -r requirements.txt
-# or
-cargo build
+python3 ai-coding-tools/scripts/init_project.py --type flutter
+python3 ai-coding-tools/scripts/init_project.py --type astro
+python3 ai-coding-tools/scripts/init_project.py --type typescript
 ```
 
-### Common Development Tasks
-- `Run Tests`: <Command to run the test suite, e.g., npm test, pytest, cargo test>
-- `Run App/Server`: <Command to start the application locally, e.g., npm run dev, python main.py>
-- `Clean Build`: <Command to clean build artifacts, e.g., npm run clean, cargo clean>
-
-### Testing Individual Components
-- <Explain how to run specific tests or single test files, e.g., pytest tests/test_module.py or npm test -- -t "some test">
-
-## Repository Structure
-
-### Core Directories
-- **src/** - Core application source code
-- **tests/** - Unit and integration tests
-- **scripts/** - Utility and automation scripts
-
-### Configuration Files
-- **<config_file_1>** - <e.g., package.json, Cargo.toml, pyproject.toml>
-- **<config_file_2>** - <e.g., tsconfig.json, vite.config.ts, .gitignore>
-
-## Code Quality and Linting
-
-### Primary Linting & Formatting Tools
-- **<Linter/Formatter Name>** - <e.g., Prettier, ESLint, Ruff, ClangFormat>
-- Configuration in `<config_file>` (e.g., `.prettierrc`, `eslint.config.js`, `.ruff.toml`)
-
-### Linting/Formatting Commands
-```bash
-# Provide commands to lint and format the codebase:
-npm run lint
-npm run format
-# or
-ruff check .
-ruff format .
-```
-
-## Architecture Overview
-
-### Key Components / Flow
-- **Data Flow/Pipeline**: <Describe the core pipeline, request life cycle, or data flow>
-- **Database/Storage**: <Describe database system, ORM, or data layer if applicable>
-- **API/Interfaces**: <Describe REST, GraphQL, gRPC, or CLI interfaces>
-
-## Development Guidelines
-
-### Testing Requirements
-- All changes must pass the test suite.
-- Write tests for any new functionality or bug fixes.
-- Place tests in the standard tests directory.
-
-### Code Style & Conventions
-- Preferred coding conventions: <e.g., Airbnb style guide, PEP 8, idiomatic Go>
-- Line length limit: <e.g., 80, 100, 120 characters>
-- Give each new function, class, and module clear docstrings/comments.
-
-### Interacting with Me (User Persona/Instructions)
-- <Optional: Define instructions for how the AI should communicate with you, e.g., "I am navigating this codebase as a senior developer. Be direct and avoid excessive polite filler. Prefer showing code over explanation.">
+That writes `tikal.yaml`, copies `tikal.project.md` from the template, and
+installs agent entrypoints. `--type astro` writes `astro` only; resolve
+expands it to TypeScript + Astro. Fill in `tikal.project.md` for this repo.

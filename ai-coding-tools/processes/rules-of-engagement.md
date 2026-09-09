@@ -23,7 +23,8 @@ Answer questions briefly. Provide only the information I asked for; I will reque
   - Begin all plans and changes with:
     - End-to-end feature tests that exercise the happy path and edge cases you anticipate
     - Unit tests exercising the individual components
-    - Name tests with the pattern subject_under_test__in_situation__does_thing. Examples:
+    - Name tests with the pattern subject_under_test__in_situation__does_thing or follow conventions specific to the programming language in play.
+    Examples:
       - parse_data__valid_data_file__returns_table_representation
       - parse_data__empty_file__raises_FileEmptyException (note: class references in test names should be camelcase like the class name, not snake case like a function name)
 - **Error Messages:**
@@ -42,3 +43,4 @@ Answer questions briefly. Provide only the information I asked for; I will reque
     3. Save that plan in @ai-coding-tools/plans
     4. Reference that version of the plan document as we update the plan together
     5. When committing work, commit the plan document along with the changed files
+    6. Use tables when it can explain or highlight tasks or data

@@ -49,11 +49,12 @@ python3 ai-coding-tools/scripts/resolve_stack.py
   - **`processes/getting-started.md`** — Context router (always-on, small).
   - **`processes/project-overview.template.md`** — Copied to `tikal.project.md` on init.
   - **`processes/rules-of-engagement.md`** — Communication, complexity, and test standards.
-  - **`processes/refactoring.md`** / **`benchmarking.md`** — Optional workflows.
+  - **`processes/refactoring.md`** / **`benchmarking.md`** / **`git.md`** — Optional workflows.
   - **`stacks/flutter/`** — Flutter commands, review, and architecture. Loaded only when `flutter` is listed.
   - **`stacks/typescript/`** — Shared TypeScript base. Loaded when listed, or when implied by `astro`.
   - **`stacks/astro/`** — Astro content-site commands, review, and architecture. Implies TypeScript.
   - **`scripts/resolve_stack.py`** — Resolves active stacks from config or markers.
+  - **`scripts/commit_paths_ok.py`** — Guards commit paths (symlink toolkit, secrets). Does not commit.
   - **`scripts/init_project.py`** — Writes config and agent entrypoints into a consuming repo.
   - **`scripts/check_file_changes.py`** — Reloads changed process files; watches only active stacks.
   - **`scripts/save_session_summary.py`** / **`track_queries.py`** — Session summary and usage telemetry.

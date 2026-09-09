@@ -1,7 +1,7 @@
 # Plan: Stack-Routed Context
 
 Agents should load only the Tikal docs that match the consuming project's
-type. Flutter is the first stack. More stacks can be added the same way.
+type. Currently Tikal supports Typescript, Flutter, and Astro. More stacks can be added the same way.
 
 ## Problem
 

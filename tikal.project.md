@@ -12,6 +12,7 @@ Reusable instructions, workflows, and hooks for AI coding agents.
 python3 -m unittest discover -s ai-coding-tools/tests -v
 python3 ai-coding-tools/scripts/resolve_stack.py
 python3 ai-coding-tools/scripts/init_project.py --type flutter --root /path/to/app
+python3 ai-coding-tools/scripts/commit_paths_ok.py --root . -- path1 path2
 ```
 
 ## Repository Structure

@@ -32,6 +32,7 @@ consumer repo (or this repo)
 consumer repo
 ├── tikal.yaml                 # allow-list: project.types
 ├── tikal.project.md           # this repo's overview (optional)
+├── plans/                     # this repo's implementation plans
 ├── CLAUDE.md / .cursor/rules  # thin: "read tikal.yaml, then the router"
 └── ai-coding-tools/
     ├── processes/

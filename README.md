@@ -43,6 +43,7 @@ python3 ai-coding-tools/scripts/resolve_stack.py
 
 - **`tikal.yaml`** — Stack allow-list for this checkout.
 - **`tikal.project.md`** — Per-repo overview (build commands, layout, architecture).
+- **`plans/`** — Implementation plans for *this* repo. Never inside the toolkit.
 - **`CLAUDE.md`** / **`.cursor/rules/tikal.mdc`** / **`.github/copilot-instructions.md`** / **`.windsurfrules`** — Thin entrypoints that point at the router.
 - **`ai-coding-tools/`**
   - **`processes/getting-started.md`** — Context router (always-on, small).
@@ -57,7 +58,7 @@ python3 ai-coding-tools/scripts/resolve_stack.py
   - **`scripts/check_file_changes.py`** — Reloads changed process files; watches only active stacks.
   - **`scripts/save_session_summary.py`** / **`track_queries.py`** — Session summary and usage telemetry.
   - **`templates/cursor/`** — Optional glob rules (e.g. attach Flutter review when `*.dart` is in play).
-  - **`plans/`** / **`context/`** — Design plans and session summaries.
+  - **`context/`** — Session summaries from hooks (local to this toolkit checkout).
 
 ---
 
@@ -121,6 +122,7 @@ To enable instruction auto-reload and session summaries, add hooks in `~/.claude
 
 * Edit `ai-coding-tools/processes/rules-of-engagement.md` for start tokens, comments, and test naming.
 * Put this app's commands and layout in `tikal.project.md`, not in the router.
+* Put implementation plans in `plans/` at the repo root, not in `ai-coding-tools/`.
 * Add a new stack as `ai-coding-tools/stacks/<type>/` and list it in `tikal.yaml`.
 
 ## License

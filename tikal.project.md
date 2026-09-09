@@ -22,6 +22,7 @@ python3 ai-coding-tools/scripts/init_project.py --type flutter --root /path/to/a
 - **ai-coding-tools/templates/** — entrypoints copied into consuming repos
 - **tikal.yaml** — stack allow-list for *this* checkout
 - **tikal.project.md** — this file
+- **plans/** — implementation plans for this repo (not inside `ai-coding-tools/`)
 
 ## Development Guidelines
 

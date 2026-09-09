@@ -26,6 +26,9 @@ Load only the docs that match this repository. Do not open other stacks.
 Do **not** read `ai-coding-tools/stacks/*` entries that are not in the
 expanded type list.
 
+Project plans live in `plans/` at the repository root. Do not create
+app files inside `ai-coding-tools/`.
+
 Optional process files — open only when the user is doing that work:
 
 - `ai-coding-tools/processes/refactoring.md` — production TDD refactor

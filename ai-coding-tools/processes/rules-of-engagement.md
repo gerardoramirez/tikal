@@ -40,7 +40,7 @@ Answer questions briefly. Provide only the information I asked for; I will reque
   - When planning changes:
     1. Give the plan a name relevant to the plan we are making
     2. Put that plan in a markdown file with the name you gave the plan
-    3. Save that plan in @ai-coding-tools/plans
+    3. Save that plan in `plans/` at the repository root (next to `tikal.yaml`). Do not write plans into `ai-coding-tools/`.
     4. Reference that version of the plan document as we update the plan together
     5. When committing work, commit the plan document along with the changed files
     6. Use tables when it can explain or highlight tasks or data

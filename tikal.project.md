@@ -17,7 +17,7 @@ python3 ai-coding-tools/scripts/commit_paths_ok.py --root . -- path1 path2
 
 ## Repository Structure
 
-- **ai-coding-tools/processes/** — stack-agnostic router and workflows
+- **ai-coding-tools/processes/** — stack-agnostic router, always-on design principles, and optional workflows
 - **ai-coding-tools/stacks/** — per-type packs (loaded only when `tikal.yaml` lists them)
 - **ai-coding-tools/scripts/** — resolve, init, hooks, telemetry
 - **ai-coding-tools/templates/** — entrypoints copied into consuming repos

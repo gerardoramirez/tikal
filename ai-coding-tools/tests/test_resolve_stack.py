@@ -198,6 +198,19 @@ class ResolveStackTests(unittest.TestCase):
 
         self.assertTrue(all("stacks/flutter" not in item for item in patterns))
 
+    def test_tracked_patterns__always_includes_process_markdown(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _write(root / "tikal.yaml", "project:\n  name: tikal\n  types: []\n")
+            patterns = resolve_stack.tracked_patterns(root)
+
+        self.assertIn("ai-coding-tools/processes/*.md", patterns)
+
+    def test_design_principles__lives_under_processes(self):
+        path = Path(__file__).resolve().parent.parent / "processes" / "design-principles.md"
+        self.assertTrue(path.is_file())
+        self.assertIn("Software Design Principles", path.read_text())
+
 
 if __name__ == "__main__":
     unittest.main()

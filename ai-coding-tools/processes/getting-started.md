@@ -21,6 +21,7 @@ Load only the docs that match this repository. Do not open other stacks.
 |---|---|
 | `tikal.project.md` | If it exists. Project-specific overview (commands, layout, architecture). |
 | `ai-coding-tools/processes/rules-of-engagement.md` | Always. Communication and code-style guardrails. |
+| `ai-coding-tools/processes/design-principles.md` | Always. Shared philosophy for shaping modules and APIs. |
 | `ai-coding-tools/stacks/<type>/index.md` then the files it lists | For **each** type in the **expanded** list that has a stack directory. |
 
 Do **not** read `ai-coding-tools/stacks/*` entries that are not in the
@@ -34,7 +35,6 @@ Optional process files — open only when the user is doing that work:
 - `ai-coding-tools/processes/refactoring.md` — production TDD refactor
 - `ai-coding-tools/processes/benchmarking.md` — speed work
 - `ai-coding-tools/processes/git.md` — commit only when the user asked
-- `ai-coding-tools/design-principles.md` — shared design rules
 
 ## 3. If this is a new checkout
 

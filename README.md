@@ -16,10 +16,11 @@ tikal.yaml          →  project.types: [astro]
         ▼
 processes/getting-started.md   (always-on router)
         │
-        ├── tikal.project.md                 (this app's overview)
-        ├── processes/rules-of-engagement.md (always)
-        ├── stacks/typescript/               (implied by astro)
-        └── stacks/astro/                    (only if listed)
+        ├── tikal.project.md                   (this app's overview)
+        ├── processes/rules-of-engagement.md   (always)
+        ├── processes/design-principles.md     (always)
+        ├── stacks/typescript/                 (implied by astro)
+        └── stacks/astro/                      (only if listed)
 ```
 
 `tikal.yaml` lives at the **consuming repo root**, not inside the toolkit. That keeps a submodule or symlink checkout clean.
@@ -39,7 +40,7 @@ If `tikal.yaml` is missing, Tikal infers types from markers (`pubspec.yaml` + a 
 python3 ai-coding-tools/scripts/resolve_stack.py
 ```
 
-Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and design principles.
+Optional process files load only when that work is happening: refactoring, benchmarking, and [git commits](ai-coding-tools/processes/git.md). Design principles load with the router on every session.
 
 ---
 
@@ -92,6 +93,7 @@ That script only refuses unsafe paths. It does not `git add` or `git commit`.
 | `processes/getting-started.md` | Context router (always-on, small) |
 | `processes/project-overview.template.md` | Copied to a consuming repo as `tikal.project.md` |
 | `processes/rules-of-engagement.md` | Communication, complexity, and test standards |
+| `processes/design-principles.md` | Always-on philosophy for modules, interfaces, and change |
 | `processes/refactoring.md`, `benchmarking.md`, `git.md` | Optional workflows |
 | `stacks/flutter/` | Loaded only when `flutter` is listed |
 | `stacks/typescript/` | Loaded when listed, or when implied by `astro` |
@@ -146,6 +148,7 @@ Put that in `~/.claude/settings.json` or the project settings. Summaries stay on
 * Put an app's commands, layout, and architecture in that app's `tikal.project.md`, not in the router.
 * Put implementation plans in `plans/` at the **app** repo root.
 * Edit `ai-coding-tools/processes/rules-of-engagement.md` for start tokens, comments, and test naming.
+* Edit `ai-coding-tools/processes/design-principles.md` for how agents should shape modules and APIs.
 * Add a stack as `ai-coding-tools/stacks/<type>/` (`index.md` plus focused docs), register it in `scripts/resolve_stack.py` and `scripts/init_project.py`, and list it in the app's `tikal.yaml`. See [stacks/README.md](ai-coding-tools/stacks/README.md).
 
 ## License

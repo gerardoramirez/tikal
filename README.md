@@ -58,6 +58,8 @@ python3 ai-coding-tools/scripts/init_project.py --type astro
 
 ### Method B: Local symlink (good while you edit Tikal)
 
+Replace `/path/to/cloned/tikal` with the real path to your Tikal clone. Running the command as written succeeds and creates a broken symlink that points nowhere.
+
 ```bash
 ln -s /path/to/cloned/tikal/ai-coding-tools ai-coding-tools
 python3 ai-coding-tools/scripts/init_project.py --type astro

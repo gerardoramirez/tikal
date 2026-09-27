@@ -60,6 +60,7 @@ python3 ai-coding-tools/scripts/init_project.py --type astro
 
 Replace `/path/to/cloned/tikal` with the real path where you cloned this repo; running this command verbatim creates a broken symlink.
 
+
 ```bash
 ln -s /path/to/cloned/tikal/ai-coding-tools ai-coding-tools
 python3 ai-coding-tools/scripts/init_project.py --type astro

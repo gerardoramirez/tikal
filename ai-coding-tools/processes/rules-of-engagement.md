@@ -19,6 +19,21 @@ Answer questions briefly. Provide only the information I asked for; I will reque
   - Where possible, place all the code for a new feature in its own directory
 - **Code Comments:**
   - Only add code comments for lines that do a confusing or paradoxical thing. Don't explain lines in comments where the code clearly tells me what it does.
+
+- **Commit cadence:**
+
+- Before starting, classify the task by size, then commit incrementally as you work.
+| Size   | Rough scope                                   | Commits on the branch |
+|--------|-----------------------------------------------|-----------------------|
+| Small  | One concern, a few files (bug fix, tweak)     | 1–5                   |
+| Medium | One feature or refactor across several files  | 6–15                  |
+| Large  | Multiple features or cross-cutting changes    | 16–30                 |
+
+- Each commit is one logical, working change with a message that says what changed and why.
+- The ranges are a guide to granularity, not a quota. Never split or pad commits just to hit a number.
+- If a task is bigger than Large (would need more than 30 commits), stop and split it into
+  separate branches. Size each branch on its own and apply the table above.
+- State the size you chose and why before writing code. If the task grows mid-way, re-classify and say so.   
 - **Automated Tests:**
   - Begin all plans and changes with:
     - End-to-end feature tests that exercise the happy path and edge cases you anticipate

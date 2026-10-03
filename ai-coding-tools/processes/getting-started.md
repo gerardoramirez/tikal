@@ -36,6 +36,10 @@ Optional process files — open only when the user is doing that work:
 - `ai-coding-tools/processes/benchmarking.md` — speed work
 - `ai-coding-tools/processes/git.md` — commit only when the user asked
 
+Human Truth Driven Design — only when the consuming repo has the file:
+
+- `docs/htdd/AGENTS.md` — if this file exists at the repository root, read it before implementation. It is that project's HTDD operating rules. If it does not exist, skip it. Do not infer HTDD rules, milestone folders, or product language.
+
 ## 3. If this is a new checkout
 
 ```bash

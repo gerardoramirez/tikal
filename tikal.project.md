@@ -29,3 +29,4 @@ python3 ai-coding-tools/scripts/commit_paths_ok.py --root . -- path1 path2
 
 - Keep `processes/getting-started.md` a thin router. Stack knowledge goes in `stacks/<type>/`.
 - Project-specific facts for a consuming app belong in that app's `tikal.yaml` and `tikal.project.md`, not in the submodule.
+- If a consuming repo has `docs/htdd/AGENTS.md`, agents read it before implementation. HTDD comes from https://github.com/gerardoramirez/human-truth-driven-design. Skip the file when it is absent.

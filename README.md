@@ -20,7 +20,8 @@ processes/getting-started.md   (always-on router)
         ├── processes/rules-of-engagement.md   (always)
         ├── processes/design-principles.md     (always)
         ├── stacks/typescript/                 (implied by astro)
-        └── stacks/astro/                      (only if listed)
+        ├── stacks/astro/                      (only if listed)
+        └── docs/htdd/AGENTS.md                (only if that file exists)
 ```
 
 `tikal.yaml` lives at the **consuming repo root**, not inside the toolkit. That keeps a submodule or symlink checkout clean.
@@ -41,6 +42,8 @@ python3 ai-coding-tools/scripts/resolve_stack.py
 ```
 
 Optional process files load only when that work is happening: refactoring, benchmarking, and [git commits](ai-coding-tools/processes/git.md). Design principles load with the router on every session.
+
+Tikal uses [Human Truth Driven Design](https://github.com/gerardoramirez/human-truth-driven-design) for HTDD. Agents follow `docs/htdd/AGENTS.md` only when a project has that file. Tikal does not ship the method.
 
 ---
 

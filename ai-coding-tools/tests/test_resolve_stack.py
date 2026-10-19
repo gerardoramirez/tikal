@@ -22,6 +22,7 @@ class ResolveStackTests(unittest.TestCase):
         self.assertEqual(result["types"], [])
         self.assertEqual(result["source"], "config")
         self.assertEqual(result["name"], "tikal")
+        self.assertEqual(result["code_reviews"], "code-reviews")
 
     def test_resolve_stack__tikal_yaml_lists_flutter__returns_flutter(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -35,6 +36,7 @@ class ResolveStackTests(unittest.TestCase):
         self.assertEqual(result["types"], ["flutter"])
         self.assertEqual(result["name"], "trail_app")
         self.assertEqual(result["source"], "config")
+        self.assertEqual(result["code_reviews"], "")
 
     def test_resolve_stack__inline_types_list__returns_types(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -56,6 +58,32 @@ class ResolveStackTests(unittest.TestCase):
         self.assertEqual(result["types"], ["python"])
         self.assertEqual(result["name"], "api")
         self.assertEqual(result["source"], "config")
+        self.assertEqual(result["code_reviews"], "")
+
+    def test_resolve_stack__code_reviews__returns_relative_directory(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _write(
+                root / "tikal.yaml",
+                "project:\n  name: reviews\n  types: []\n  code_reviews: code-reviews\n",
+            )
+            result = resolve_stack.resolve(root)
+            rendered = resolve_stack.format_human(result)
+
+        self.assertEqual(result["code_reviews"], "code-reviews")
+        self.assertIn("code_reviews: code-reviews\n", rendered)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _write(
+                root / "tikal.json",
+                json.dumps(
+                    {"project": {"name": "api", "types": ["python"], "code_reviews": "code-reviews"}}
+                ),
+            )
+            result = resolve_stack.resolve(root)
+
+        self.assertEqual(result["code_reviews"], "code-reviews")
 
     def test_resolve_stack__dotfile_yaml__is_found(self):
         with tempfile.TemporaryDirectory() as tmp:

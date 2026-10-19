@@ -45,6 +45,8 @@ def tikal_yaml(name: str, types: list[str]) -> str:
         f"  name: {name}\n"
         "  types:\n"
         f"{type_lines}\n"
+        "  # Optional. Relative directory for code-review write-ups.\n"
+        "  # code_reviews: code-reviews\n"
     )
 
 

@@ -31,6 +31,7 @@ project:
   name: trail_app
   types:
     - astro
+  # code_reviews: code-reviews   # optional, relative to this workspace
 ```
 
 Known types: `flutter`, `typescript`, `astro`. `astro` always expands to `typescript` then `astro`. `typescript` alone does not load Astro.

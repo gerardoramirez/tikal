@@ -42,6 +42,10 @@ dart run build_runner build --delete-conflicting-outputs
 - **Navigation:** <e.g. go_router>
 - **Data / APIs:** <how the app talks to backends or local storage>
 
+## Code reviews
+
+`project.code_reviews` in `tikal.yaml` is the directory for review write-ups, relative to this workspace. Leave the key unset when this repo does not store reviews.
+
 ## Development Guidelines
 
 - Match existing patterns in this repo. Do not introduce a second state-management library.

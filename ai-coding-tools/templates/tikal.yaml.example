@@ -6,3 +6,5 @@ project:
     - astro
     # or: flutter | typescript
     # astro always loads the typescript stack as well
+  # Optional. Relative directory for code-review write-ups in this workspace.
+  # code_reviews: code-reviews

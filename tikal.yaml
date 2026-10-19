@@ -3,3 +3,5 @@
 project:
   name: tikal
   types: []
+  # Relative directory for code-review write-ups. Not a home path.
+  code_reviews: code-reviews

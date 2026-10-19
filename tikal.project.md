@@ -21,7 +21,7 @@ python3 ai-coding-tools/scripts/commit_paths_ok.py --root . -- path1 path2
 - **ai-coding-tools/stacks/** — per-type packs (loaded only when `tikal.yaml` lists them)
 - **ai-coding-tools/scripts/** — resolve, init, hooks, telemetry
 - **ai-coding-tools/templates/** — entrypoints copied into consuming repos
-- **tikal.yaml** — stack allow-list for *this* checkout
+- **tikal.yaml** — stack allow-list for *this* checkout. `project.code_reviews` is the relative directory for review write-ups (`code-reviews` here)
 - **tikal.project.md** — this file
 - **plans/** — implementation plans for this repo (not inside `ai-coding-tools/`)
 

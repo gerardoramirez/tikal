@@ -24,7 +24,9 @@ Those stack files stay the language checklist. Do not copy them here.
 
 ## Where the write-up goes
 
-Write the review in the review workspace at `gera-work/code-reviews/<repo>/`. Add one row under that repo in `gera-work/code-reviews/summary.md`. The row names the pull request and points at the write-up.
+Read `project.code_reviews` from `tikal.yaml` in the workspace that keeps reviews (also `.tikal.yaml` or `tikal.json`). The value is a directory relative to that workspace root. When the key is absent, use `code-reviews`.
+
+Write the review at `<code_reviews>/<repo>/`. Add one row under that repo in `<code_reviews>/summary.md`. The row names the pull request and points at the write-up.
 
 Leave the service checkout untouched. Do not commit the review into the repository under review. Do not put the write-up inside `ai-coding-tools/`.
 

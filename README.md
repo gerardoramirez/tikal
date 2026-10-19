@@ -41,7 +41,7 @@ If `tikal.yaml` is missing, Tikal infers types from markers (`pubspec.yaml` + a 
 python3 ai-coding-tools/scripts/resolve_stack.py
 ```
 
-Optional process files load only when that work is happening: refactoring, benchmarking, and [git commits](ai-coding-tools/processes/git.md). Design principles load with the router on every session.
+Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and [code review](ai-coding-tools/processes/code-review.md). Design principles load with the router on every session.
 
 Tikal uses [Human Truth Driven Design](https://github.com/gerardoramirez/human-truth-driven-design) for HTDD. Agents follow `docs/htdd/AGENTS.md` only when a project has that file. Tikal does not ship the method.
 
@@ -100,7 +100,7 @@ That script only refuses unsafe paths. It does not `git add` or `git commit`.
 | `processes/project-overview.template.md` | Copied to a consuming repo as `tikal.project.md` |
 | `processes/rules-of-engagement.md` | Communication, complexity, and test standards |
 | `processes/design-principles.md` | Always-on philosophy for modules, interfaces, and change |
-| `processes/refactoring.md`, `benchmarking.md`, `git.md` | Optional workflows |
+| `processes/refactoring.md`, `benchmarking.md`, `git.md`, `code-review.md` | Optional workflows |
 | `stacks/flutter/` | Loaded only when `flutter` is listed |
 | `stacks/typescript/` | Loaded when listed, or when implied by `astro` |
 | `stacks/astro/` | Implies TypeScript |

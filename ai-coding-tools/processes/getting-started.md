@@ -35,6 +35,7 @@ Optional process files — open only when the user is doing that work:
 - `ai-coding-tools/processes/refactoring.md` — production TDD refactor
 - `ai-coding-tools/processes/benchmarking.md` — speed work
 - `ai-coding-tools/processes/git.md` — commit only when the user asked
+- `ai-coding-tools/processes/code-review.md` — open when the task is a review; leave closed for ordinary edits
 
 Human Truth Driven Design — only when the consuming repo has the file:
 

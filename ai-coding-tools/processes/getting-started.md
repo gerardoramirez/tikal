@@ -40,6 +40,14 @@ Optional process files — open only when the user is doing that work:
 Human Truth Driven Design — only when the consuming repo has the file:
 
 - `docs/htdd/AGENTS.md` — if this file exists at the repository root, read it before implementation. It is that project's HTDD operating rules. If it does not exist, skip it. Do not infer HTDD rules, milestone folders, or product language.
+- If `docs/htdd/MILESTONES/` exists, read `docs/htdd/MILESTONES/CURRENT.md` and only the folder it names. If `AGENTS.md` names a different milestone folder, or tells you to sort `MILESTONES/`, stop. Say the agent instructions are stale. Do not infer the governing milestone from folder numbers.
+- `ai-coding-tools/processes/htdd-gate.md` — load only when `docs/htdd/AGENTS.md` exists, before any implementation.
+
+If the diff touches `firebase/functions`, `firestore.rules`, or
+`firestore.indexes.json`, and no stack in the expanded type list covers
+that surface, say so. Still apply the HTDD gate. Do not treat those files
+as ungoverned scripts. Secrets and env templates stay out of source even
+when `ai-coding-tools/stacks/flutter/review.md` was not loaded.
 
 ## 3. If this is a new checkout
 

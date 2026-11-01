@@ -59,3 +59,4 @@ Answer questions briefly. Provide only the information I asked for; I will reque
     4. Reference that version of the plan document as we update the plan together
     5. When committing work, commit the plan document along with the changed files
     6. Use tables when it can explain or highlight tasks or data
+    7. When `docs/htdd/` exists, the plan in `plans/` names the governing milestone and the ticket, and the first commit does not add a surface that milestone excludes.

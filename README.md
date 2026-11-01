@@ -21,7 +21,9 @@ processes/getting-started.md   (always-on router)
         ├── processes/design-principles.md     (always)
         ├── stacks/typescript/                 (implied by astro)
         ├── stacks/astro/                      (only if listed)
-        └── docs/htdd/AGENTS.md                (only if that file exists)
+        ├── docs/htdd/AGENTS.md                (only if that file exists)
+        ├── docs/htdd/MILESTONES/CURRENT.md    (only the folder it names)
+        └── processes/htdd-gate.md             (only if AGENTS.md exists)
 ```
 
 `tikal.yaml` lives at the **consuming repo root**, not inside the toolkit. That keeps a submodule or symlink checkout clean.
@@ -44,7 +46,7 @@ python3 ai-coding-tools/scripts/resolve_stack.py
 
 Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and [code review](ai-coding-tools/processes/code-review.md). Design principles load with the router on every session.
 
-Tikal uses [Human Truth Driven Design](https://github.com/gerardoramirez/human-truth-driven-design) for HTDD. Agents follow `docs/htdd/AGENTS.md` only when a project has that file. Tikal does not ship the method.
+Tikal uses [Human Truth Driven Design](https://github.com/gerardoramirez/human-truth-driven-design) for HTDD. Agents follow the product's `docs/htdd/AGENTS.md` and `docs/htdd/MILESTONES/CURRENT.md` only when those files exist, and load `processes/htdd-gate.md` before implementation when `AGENTS.md` exists. Tikal does not ship the method.
 
 ---
 
@@ -102,6 +104,7 @@ That script only refuses unsafe paths. It does not `git add` or `git commit`.
 | `processes/rules-of-engagement.md` | Communication, complexity, and test standards |
 | `processes/design-principles.md` | Always-on philosophy for modules, interfaces, and change |
 | `processes/refactoring.md`, `benchmarking.md`, `git.md`, `code-review.md` | Optional workflows |
+| `processes/htdd-gate.md` | Before implementation, only when the product has `docs/htdd/AGENTS.md` |
 | `stacks/flutter/` | Loaded only when `flutter` is listed |
 | `stacks/typescript/` | Loaded when listed, or when implied by `astro` |
 | `stacks/astro/` | Implies TypeScript |

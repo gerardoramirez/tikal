@@ -19,6 +19,7 @@ This file is the review workflow. It does not restate judgment or language check
 
 1. Judge the diff against `processes/design-principles.md`.
 2. Then apply the checklist in `stacks/<type>/review.md` for each type in the expanded list from `processes/getting-started.md`.
+3. When the repository under review has `docs/htdd/`, apply the HTDD checks in the write-up. Those checks do not replace the stack checklist.
 
 Those stack files stay the language checklist. Do not copy them here.
 
@@ -40,3 +41,8 @@ Use this order:
 4. **Prior comments** — threads already on the pull request, including threads the latest commit fixed.
 5. **Checklist** — `design-principles.md` first, then `stacks/<type>/review.md`, with a result for each item applied.
 6. **Comments worth leaving** — comments still worth posting. Omit anything Prior comments already marked fixed or already said.
+7. **HTDD** — when the repository under review has `docs/htdd/`, include these checks:
+   - The pull request names the milestone and whether it completes a ticket, repairs a finding, adds evidence, or changes the contract.
+   - The diff stays inside that milestone's in-scope list.
+   - A governed sentence changed only together with the contract and the tests that lock it. A red lock test is a finding.
+   - A new Firestore collection, rule, index, or callable is an access or discovery change. Quote the contract that allows it.

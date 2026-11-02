@@ -13,15 +13,16 @@ python3 -m unittest discover -s ai-coding-tools/tests -v
 python3 ai-coding-tools/scripts/resolve_stack.py
 python3 ai-coding-tools/scripts/init_project.py --type flutter --root /path/to/app
 python3 ai-coding-tools/scripts/commit_paths_ok.py --root . -- path1 path2
+python3 ai-coding-tools/scripts/propose_commit_message.py
 ```
 
 ## Repository Structure
 
 - **ai-coding-tools/processes/** — stack-agnostic router, always-on design principles, and optional workflows
 - **ai-coding-tools/stacks/** — per-type packs (loaded only when `tikal.yaml` lists them)
-- **ai-coding-tools/scripts/** — resolve, init, hooks, telemetry
+- **ai-coding-tools/scripts/** — resolve, init, hooks, telemetry. `propose_commit_message.py` is a stop hook: with `auto_commit_message` on, it asks for one commit message and does not commit.
 - **ai-coding-tools/templates/** — entrypoints copied into consuming repos
-- **tikal.yaml** — stack allow-list for *this* checkout. `project.code_reviews` is the relative directory for review write-ups (`code-reviews` here)
+- **tikal.yaml** — stack allow-list for *this* checkout. `project.code_reviews` is the relative directory for review write-ups (`code-reviews` here). `auto_commit_message` stays off.
 - **tikal.project.md** — this file
 - **plans/** — implementation plans for this repo (not inside `ai-coding-tools/`)
 

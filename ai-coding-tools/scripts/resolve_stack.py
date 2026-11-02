@@ -95,6 +95,18 @@ def _unquote(value: str) -> str:
     return value
 
 
+def _parse_bool(value: str) -> bool:
+    return _unquote(value).strip().lower() in {"true", "yes", "on", "1"}
+
+
+def _coerce_bool(value: object) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return _parse_bool(value)
+    return False
+
+
 def _parse_inline_list(value: str) -> list[str]:
     inner = value.strip()
     if inner == "[]":
@@ -111,6 +123,7 @@ def parse_simple_project_yaml(text: str) -> dict:
     """Parse the small tikal.yaml schema without a YAML dependency."""
     name = ""
     code_reviews = ""
+    auto_commit_message = False
     types: list[str] | None = None
     in_project = False
     in_types = False
@@ -157,6 +170,10 @@ def parse_simple_project_yaml(text: str) -> dict:
             code_reviews = _unquote(stripped[len("code_reviews:") :])
             continue
 
+        if stripped.startswith("auto_commit_message:"):
+            auto_commit_message = _parse_bool(stripped[len("auto_commit_message:") :])
+            continue
+
         if stripped.startswith("types:"):
             rest = stripped[len("types:") :].strip()
             if rest:
@@ -171,6 +188,7 @@ def parse_simple_project_yaml(text: str) -> dict:
         "name": name,
         "types": types if types is not None else [],
         "code_reviews": code_reviews,
+        "auto_commit_message": auto_commit_message,
     }
 
 
@@ -186,6 +204,7 @@ def load_config(path: pathlib.Path) -> dict:
             "name": project.get("name", "") or "",
             "types": list(types),
             "code_reviews": project.get("code_reviews", "") or "",
+            "auto_commit_message": _coerce_bool(project.get("auto_commit_message", False)),
         }
     return parse_simple_project_yaml(text)
 
@@ -249,11 +268,13 @@ def resolve(root: pathlib.Path | None = None) -> dict:
         source = "config"
         name = parsed.get("name", "")
         code_reviews = parsed.get("code_reviews", "") or ""
+        auto_commit_message = bool(parsed.get("auto_commit_message", False))
     else:
         types = detect_types(root)
         source = "detect" if types else "none"
         name = ""
         code_reviews = ""
+        auto_commit_message = False
         config_path = None
 
     overview = root / PROJECT_OVERVIEW_NAME
@@ -264,6 +285,7 @@ def resolve(root: pathlib.Path | None = None) -> dict:
         "name": name,
         "types": types,
         "code_reviews": code_reviews,
+        "auto_commit_message": auto_commit_message,
         "source": source,
         "config_path": str(config_path.relative_to(root)) if config_path else None,
         "project_overview": PROJECT_OVERVIEW_NAME if overview.is_file() else None,
@@ -289,6 +311,8 @@ def format_human(result: dict) -> str:
     ]
     if result.get("code_reviews"):
         lines.append(f"code_reviews: {result['code_reviews']}")
+    if result.get("auto_commit_message"):
+        lines.append("auto_commit_message: true")
     if result["config_path"]:
         lines.append(f"config: {result['config_path']}")
     if result["project_overview"]:

@@ -23,6 +23,7 @@ class ResolveStackTests(unittest.TestCase):
         self.assertEqual(result["source"], "config")
         self.assertEqual(result["name"], "tikal")
         self.assertEqual(result["code_reviews"], "code-reviews")
+        self.assertFalse(result["auto_commit_message"])
 
     def test_resolve_stack__tikal_yaml_lists_flutter__returns_flutter(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -85,6 +86,62 @@ class ResolveStackTests(unittest.TestCase):
 
         self.assertEqual(result["code_reviews"], "code-reviews")
 
+    def test_resolve_stack__auto_commit_message__is_opt_in(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _write(
+                root / "tikal.yaml",
+                "project:\n  name: app\n  types: []\n  auto_commit_message: true\n",
+            )
+            result = resolve_stack.resolve(root)
+            rendered = resolve_stack.format_human(result)
+
+        self.assertTrue(result["auto_commit_message"])
+        self.assertIn("auto_commit_message: true\n", rendered)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _write(
+                root / "tikal.yaml",
+                "project:\n  name: app\n  types: []\n  auto_commit_message: false\n",
+            )
+            result = resolve_stack.resolve(root)
+            rendered = resolve_stack.format_human(result)
+
+        self.assertFalse(result["auto_commit_message"])
+        self.assertNotIn("auto_commit_message:", rendered)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _write(root / "tikal.yaml", "project:\n  name: app\n  types: []\n")
+            result = resolve_stack.resolve(root)
+
+        self.assertFalse(result["auto_commit_message"])
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _write(
+                root / "tikal.json",
+                json.dumps(
+                    {"project": {"name": "api", "types": [], "auto_commit_message": True}}
+                ),
+            )
+            result = resolve_stack.resolve(root)
+
+        self.assertTrue(result["auto_commit_message"])
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _write(
+                root / "tikal.json",
+                json.dumps(
+                    {"project": {"name": "api", "types": [], "auto_commit_message": "false"}}
+                ),
+            )
+            result = resolve_stack.resolve(root)
+
+        self.assertFalse(result["auto_commit_message"])
+
     def test_resolve_stack__dotfile_yaml__is_found(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -114,6 +171,7 @@ class ResolveStackTests(unittest.TestCase):
 
         self.assertEqual(result["types"], ["flutter"])
         self.assertEqual(result["source"], "detect")
+        self.assertFalse(result["auto_commit_message"])
 
     def test_resolve_stack__missing_config_dart_only_pubspec__returns_empty(self):
         with tempfile.TemporaryDirectory() as tmp:

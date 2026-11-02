@@ -1,8 +1,26 @@
 # Git commits
 
-Open this file only when the user asked to commit (or to review what would be committed). Do not commit on your own.
+Open this file when the user asked to commit (or to review what would be committed). Also open it at the end of a task that changed files when `project.auto_commit_message` is true.
 
-This file is judgment, not a runner. Do not add a script that stages or commits for you.
+Do not commit unless the user asked. This file is judgment, not a runner. Do not add a script that stages or commits for you.
+
+## When auto_commit_message is on
+
+If this turn changed files, end the reply with one proposed message. Run `git status`, `git diff`, and `git log` (recent messages) from the repo root. Focus on why, not a file list.
+
+Print the heading below as a real heading, then the message inside a HEREDOC. Do not run the HEREDOC. Do not stage, commit, push, or amend. If you did not change files this turn, say so and do not invent a message.
+
+## Proposed commit message
+
+```
+git commit -m "$(cat <<'EOF'
+Why this change exists.
+
+EOF
+)"
+```
+
+The heading line must be exactly `## Proposed commit message`. A stop hook looks for it and stays quiet once it is there.
 
 ## Before you stage
 

@@ -47,6 +47,9 @@ def tikal_yaml(name: str, types: list[str]) -> str:
         f"{type_lines}\n"
         "  # Optional. Relative directory for code-review write-ups.\n"
         "  # code_reviews: code-reviews\n"
+        "  # Optional. When true, agents propose one commit message after\n"
+        "  # work that leaves the tree dirty. They still do not commit.\n"
+        "  # auto_commit_message: true\n"
     )
 
 

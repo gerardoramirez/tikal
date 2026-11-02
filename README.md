@@ -34,6 +34,7 @@ project:
   types:
     - astro
   # code_reviews: code-reviews   # optional, relative to this workspace
+  # auto_commit_message: true    # optional; propose a message, do not commit
 ```
 
 Known types: `flutter`, `typescript`, `astro`. `astro` always expands to `typescript` then `astro`. `typescript` alone does not load Astro.
@@ -44,7 +45,7 @@ If `tikal.yaml` is missing, Tikal infers types from markers (`pubspec.yaml` + a 
 python3 ai-coding-tools/scripts/resolve_stack.py
 ```
 
-Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and [code review](ai-coding-tools/processes/code-review.md). Design principles load with the router on every session.
+Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and [code review](ai-coding-tools/processes/code-review.md). When `auto_commit_message` is true, agents also load git.md at the end of a task that changed files and propose one message. They still commit only when asked. Design principles load with the router on every session.
 
 Tikal uses [Human Truth Driven Design](https://github.com/gerardoramirez/human-truth-driven-design) for HTDD. Agents follow the product's `docs/htdd/AGENTS.md` and `docs/htdd/MILESTONES/CURRENT.md` only when those files exist, and load `processes/htdd-gate.md` before implementation when `AGENTS.md` exists. Tikal does not ship the method.
 
@@ -111,6 +112,7 @@ That script only refuses unsafe paths. It does not `git add` or `git commit`.
 | `scripts/resolve_stack.py` | Resolves active stacks from config or markers |
 | `scripts/init_project.py` | Writes config and agent entrypoints into an app |
 | `scripts/commit_paths_ok.py` | Guards commit paths (symlink toolkit, secrets) |
+| `scripts/propose_commit_message.py` | Stop hook: asks for one commit message when the flag is on. Does not stage or commit |
 | `scripts/check_file_changes.py` | Reloads changed process files; watches only active stacks |
 | `scripts/save_session_summary.py`, `track_queries.py` | Local session summary and usage telemetry |
 | `templates/cursor/` | Optional glob rules (e.g. Flutter review when `*.dart` is in play) |
@@ -126,7 +128,7 @@ python3 -m unittest discover -s ai-coding-tools/tests -v
 
 ---
 
-## Optional Claude Code hooks
+## Optional hooks
 
 To reload instructions when process files change, and to write a local session summary:
 
@@ -143,6 +145,10 @@ To reload instructions when process files change, and to write a local session s
       {
         "type": "command",
         "command": "python3 ai-coding-tools/scripts/save_session_summary.py"
+      },
+      {
+        "type": "command",
+        "command": "python3 ai-coding-tools/scripts/propose_commit_message.py"
       }
     ]
   }
@@ -150,6 +156,26 @@ To reload instructions when process files change, and to write a local session s
 ```
 
 Put that in `~/.claude/settings.json` or the project settings. Summaries stay on disk under `ai-coding-tools/context/`.
+
+`propose_commit_message.py` is safe while `auto_commit_message` is off: it prints `{}` and exits. When the flag is on, a normal completion with a dirty worktree and no proposal yet asks the agent for one message. It does not stage or commit. Copilot and Windsurf have no stop hook here; they follow the same rule from `processes/git.md`.
+
+Cursor project hook (copy this; `init_project.py` does not merge an existing `hooks.json`):
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "stop": [
+      {
+        "command": "python3 ai-coding-tools/scripts/propose_commit_message.py",
+        "loop_limit": 1
+      }
+    ]
+  }
+}
+```
+
+Put that in `.cursor/hooks.json` at the consuming repo root. The script prints a Cursor `followup_message` or, for Claude Code, a `decision` of `block`. Either way the agent gets one follow-up, then the hook stays quiet.
 
 ---
 

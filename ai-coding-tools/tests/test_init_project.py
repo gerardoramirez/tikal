@@ -31,6 +31,8 @@ class InitProjectTests(unittest.TestCase):
             self.assertEqual(result["types"], ["flutter"])
             self.assertEqual(result["name"], "trail_app")
             self.assertEqual(result["code_reviews"], "")
+            self.assertFalse(result["auto_commit_message"])
+            self.assertIn("# auto_commit_message: true", (root / "tikal.yaml").read_text())
             self.assertTrue((root / "tikal.yaml").is_file())
             self.assertTrue((root / "tikal.project.md").is_file())
             self.assertTrue((root / ".cursor" / "rules" / "tikal.mdc").is_file())

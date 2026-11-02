@@ -19,8 +19,9 @@ PROPOSAL_HEADING = "## Proposed commit message"
 
 FOLLOWUP_MESSAGE = (
     "auto_commit_message is on. Read ai-coding-tools/processes/git.md. "
-    "If you changed files this turn, propose one commit message under the heading "
-    "`## Proposed commit message`, in a HEREDOC, focused on why. "
+    "If you changed files this turn, print one copy-paste line under the heading "
+    "`## Proposed commit message`: git commit -m \"why this change exists\". "
+    "One line, no double quotes inside the message. "
     "Do not stage, commit, push, or amend. "
     "If you did not change files this turn, say so and stop."
 )

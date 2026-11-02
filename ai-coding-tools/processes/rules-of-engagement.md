@@ -34,7 +34,7 @@ Answer questions briefly. Provide only the information I asked for; I will reque
 - If a task is bigger than Large (would need more than 30 commits), stop and split it into
   separate branches. Size each branch on its own and apply the table above.
 - State the size you chose and why before writing code. If the task grows mid-way, re-classify and say so.
-- When `project.auto_commit_message` is true, end the task with one proposed commit message. The flag proposes a message. It does not authorize a commit. 
+- When `project.auto_commit_message` is true, end the task with one line the user can copy: `git commit -m "why this change exists"`. The flag proposes that line. It does not authorize a commit. 
 - **Automated Tests:**
   - Begin all plans and changes with:
     - End-to-end feature tests that exercise the happy path and edge cases you anticipate

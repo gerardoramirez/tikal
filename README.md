@@ -55,7 +55,7 @@ Tikal uses [Human Truth Driven Design](https://github.com/gerardoramirez/human-t
 
 Two things produce the message. The flag alone is neither of them.
 
-1. At the end of a turn that changed files, the agent opens `ai-coding-tools/processes/git.md` and prints one message under `## Proposed commit message`. That file lives on the `ai-coding-tools` link (submodule or symlink). Open that path. A search of the app repo that does not follow the link will miss the file, and the turn will end with no proposal.
+1. At the end of a turn that changed files, the agent opens `ai-coding-tools/processes/git.md` and prints one line under `## Proposed commit message` that you can copy: `git commit -m "why this change exists"`. That file lives on the `ai-coding-tools` link (submodule or symlink). Open that path. A search of the app repo that does not follow the link will miss the file, and the turn will end with no proposal.
 2. The backup is a stop hook. If the reply has no `## Proposed commit message` and the worktree is still dirty, `propose_commit_message.py` sends one follow-up. `init_project.py` does not install this hook. A new app does not register it: no `.cursor/hooks.json`, no Claude `Stop` entry, and no `.codex/hooks.json`. With the hook absent, a turn that skips the heading ends with no message.
 
 The same script serves Cursor, Claude Code, and Codex. It stays quiet when the flag is off, when the worktree is clean, or when the reply already has the heading. If the change is already committed, adding the hook afterward does not propose a message for that commit. It runs on the next turn that leaves the tree dirty.

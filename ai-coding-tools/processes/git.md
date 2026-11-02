@@ -6,18 +6,14 @@ Do not commit unless the user asked. This file is judgment, not a runner. Do not
 
 ## When auto_commit_message is on
 
-If this turn changed files, end the reply with one proposed message. Run `git status`, `git diff`, and `git log` (recent messages) from the repo root. Focus on why, not a file list.
+If this turn changed files, end the reply with one line the user can copy and run: `git commit -m "..."`. Run `git status`, `git diff`, and `git log` (recent messages) from the repo root. The text inside the quotes is why the change exists, not a file list.
 
-Print the heading below as a real heading, then the message inside a HEREDOC. Do not run the HEREDOC. Do not stage, commit, push, or amend. If you did not change files this turn, say so and do not invent a message.
+Print the heading below as a real heading, then one fenced line. Keep the message one line, with no double quotes inside it, so it pastes cleanly. Do not run the command. Do not stage, commit, push, or amend. If you did not change files this turn, say so and do not invent a message.
 
 ## Proposed commit message
 
 ```
-git commit -m "$(cat <<'EOF'
-Why this change exists.
-
-EOF
-)"
+git commit -m "Why this change exists."
 ```
 
 The heading line must be exactly `## Proposed commit message`. A stop hook looks for it and stays quiet once it is there.
@@ -43,6 +39,6 @@ If that exits non-zero, fix the list. Do not commit.
 
 ## Commit
 
-- HEREDOC message. Focus on why, not a file list.
+- HEREDOC message when you are the one committing. When `auto_commit_message` is on, the chat proposal is the single `git commit -m "..."` line above, for the user to copy. Focus on why, not a file list.
 - Do not push, amend, `--no-verify`, or change git config unless the user asked.
 - After the commit, run `git status` and confirm the intended files landed.

@@ -269,9 +269,12 @@ class ProposeCommitMessageTests(unittest.TestCase):
 
     def test_propose_commit_message__source__does_not_invoke_git_commit(self):
         source = (SCRIPTS / "propose_commit_message.py").read_text()
-        self.assertNotIn("git commit", source)
+        self.assertIn("git commit -m", source)
+        self.assertNotIn("HEREDOC", source)
         self.assertNotIn("git add", source)
         self.assertIn('["git", "status", "--porcelain"]', source)
+        self.assertNotIn('"commit"', source)
+        self.assertNotIn("'commit'", source)
 
     def test_propose_commit_message__main_cursor_dirty_tree__prints_followup_json(self):
         with tempfile.TemporaryDirectory() as tmp:

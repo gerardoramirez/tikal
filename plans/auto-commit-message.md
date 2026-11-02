@@ -69,7 +69,7 @@ project:
 ## What the agent does when the flag is on
 
 - Load `git.md` at the end of a task that changed files, not only when you asked to commit.
-- Run `git status`, `git diff`, and recent `git log`. Propose one message, why not a file list, in a HEREDOC, under the heading `## Proposed commit message`.
+- Run `git status`, `git diff`, and recent `git log`. Propose one line the user can copy, `git commit -m "why this change exists"`, under the heading `## Proposed commit message`.
 - Do not stage, commit, push, or amend.
 - Commit cadence in `rules-of-engagement.md` stays the granularity guide when a commit is requested. The flag proposes a message. It does not authorize a commit.
 

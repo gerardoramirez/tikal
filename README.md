@@ -45,9 +45,85 @@ If `tikal.yaml` is missing, Tikal infers types from markers (`pubspec.yaml` + a 
 python3 ai-coding-tools/scripts/resolve_stack.py
 ```
 
-Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and [code review](ai-coding-tools/processes/code-review.md). When `auto_commit_message` is true, agents also load git.md at the end of a task that changed files and propose one message. They still commit only when asked. Design principles load with the router on every session.
+Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and [code review](ai-coding-tools/processes/code-review.md). Design principles load with the router on every session.
 
 Tikal uses [Human Truth Driven Design](https://github.com/gerardoramirez/human-truth-driven-design) for HTDD. Agents follow the product's `docs/htdd/AGENTS.md` and `docs/htdd/MILESTONES/CURRENT.md` only when those files exist, and load `processes/htdd-gate.md` before implementation when `AGENTS.md` exists. Tikal does not ship the method.
+
+## How to get a proposed commit message
+
+`auto_commit_message: true` only asks for a proposal. It does not stage or commit. `resolve_stack.py` reading the flag does not print a message in chat.
+
+Two things produce the message. The flag alone is neither of them.
+
+1. At the end of a turn that changed files, the agent opens `ai-coding-tools/processes/git.md` and prints one message under `## Proposed commit message`. That file lives on the `ai-coding-tools` link (submodule or symlink). Open that path. A search of the app repo that does not follow the link will miss the file, and the turn will end with no proposal.
+2. The backup is a stop hook. If the reply has no `## Proposed commit message` and the worktree is still dirty, `propose_commit_message.py` sends one follow-up. `init_project.py` does not install this hook. A new app does not register it: no `.cursor/hooks.json`, no Claude `Stop` entry, and no `.codex/hooks.json`. With the hook absent, a turn that skips the heading ends with no message.
+
+The same script serves Cursor, Claude Code, and Codex. It stays quiet when the flag is off, when the worktree is clean, or when the reply already has the heading. If the change is already committed, adding the hook afterward does not propose a message for that commit. It runs on the next turn that leaves the tree dirty.
+
+### Cursor
+
+Add `.cursor/hooks.json` at the consuming repo root. Cursor runs that file from the repo root.
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "stop": [
+      {
+        "command": "python3 ai-coding-tools/scripts/propose_commit_message.py",
+        "loop_limit": 1
+      }
+    ]
+  }
+}
+```
+
+Cursor reads `followup_message` and submits it once.
+
+### Claude Code
+
+Add the command to `Stop` in `.claude/settings.json` at the repo root, or in `~/.claude/settings.json` for every repo. `init_project.py` does not write either file. If `Stop` already lists other commands, add this one beside them. The session-summary command in [Optional hooks](#optional-hooks) can stay in the same list.
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python3 ai-coding-tools/scripts/propose_commit_message.py"
+      }
+    ]
+  }
+}
+```
+
+Claude Code reads `{"decision": "block", "reason": "..."}` and continues once.
+
+### Codex
+
+Hooks run unless `~/.codex/config.toml` sets `[features] hooks = false`. Add `.codex/hooks.json` at the repo root. Project hooks load only when that project is trusted. After you add the file, run `/hooks` and trust the new command. Codex skips it until that review is saved. A user-wide copy can live in `~/.codex/hooks.json` instead.
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/ai-coding-tools/scripts/propose_commit_message.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+The `git rev-parse` form keeps the script path stable when Codex starts in a subdirectory. Codex uses the same `decision` / `reason` output as Claude Code.
+
+Copilot and Windsurf have no stop hook here. They only get the message when the agent opens `git.md`.
 
 ---
 
@@ -157,25 +233,7 @@ To reload instructions when process files change, and to write a local session s
 
 Put that in `~/.claude/settings.json` or the project settings. Summaries stay on disk under `ai-coding-tools/context/`.
 
-`propose_commit_message.py` is safe while `auto_commit_message` is off: it prints `{}` and exits. When the flag is on, a normal completion with a dirty worktree and no proposal yet asks the agent for one message. It does not stage or commit. Copilot and Windsurf have no stop hook here; they follow the same rule from `processes/git.md`.
-
-Cursor project hook (copy this; `init_project.py` does not merge an existing `hooks.json`):
-
-```json
-{
-  "version": 1,
-  "hooks": {
-    "stop": [
-      {
-        "command": "python3 ai-coding-tools/scripts/propose_commit_message.py",
-        "loop_limit": 1
-      }
-    ]
-  }
-}
-```
-
-Put that in `.cursor/hooks.json` at the consuming repo root. The script prints a Cursor `followup_message` or, for Claude Code, a `decision` of `block`. Either way the agent gets one follow-up, then the hook stays quiet.
+`propose_commit_message.py` on `Stop` is the Claude Code backup in [How to get a proposed commit message](#how-to-get-a-proposed-commit-message). It is safe while `auto_commit_message` is off: it prints `{}` and exits. `init_project.py` does not add this registration. Claude Code reads `decision` / `reason`. Cursor reads `followup_message` from `.cursor/hooks.json`. Codex reads the same `decision` / `reason` pair from `.codex/hooks.json`. Each host continues once, then the hook stays quiet.
 
 ---
 

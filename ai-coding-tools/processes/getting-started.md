@@ -34,7 +34,7 @@ Optional process files — open only when the user is doing that work:
 
 - `ai-coding-tools/processes/refactoring.md` — production TDD refactor
 - `ai-coding-tools/processes/benchmarking.md` — speed work
-- `ai-coding-tools/processes/git.md` — commit only when the user asked. When `project.auto_commit_message` is true, also open it at the end of a task that changed files and propose one message under `## Proposed commit message`. Do not commit unless the user asked.
+- `ai-coding-tools/processes/git.md` — commit only when the user asked. When `project.auto_commit_message` is true, open this path at the end of a task that changed files and propose one message under `## Proposed commit message`. The file lives on the `ai-coding-tools` link. Open that path even when a search of the app repo does not list it. Do not commit unless the user asked. The flag does not print the message by itself. A stop hook is the backup, and only after one of these is registered: `.cursor/hooks.json`, a Claude `Stop` entry, or `.codex/hooks.json`. `init_project.py` does not add that registration. The README how-to has each file.
 - `ai-coding-tools/processes/code-review.md` — open when the task is a review; leave closed for ordinary edits
 
 Human Truth Driven Design — only when the consuming repo has the file:

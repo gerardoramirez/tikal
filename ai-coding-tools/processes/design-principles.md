@@ -20,8 +20,28 @@ module boundaries.
 ## 1. Complexity is the enemy
 
 The job is to reduce the complexity that a later reader (human or agent)
-must hold in their head — not to demonstrate cleverness.
+must hold in their head — not to demonstrate cleverness. What that reader
+can understand is the limit on the system.
 
+Complexity comes from dependencies and obscurity. It accumulates in small
+pieces: hundreds of them, not one catastrophic mistake.
+
+A dependency exists when code cannot be understood or modified in
+isolation. The cost is change amplification: one edit forces work in
+other code. Dependencies cannot be removed entirely. Introduce one only
+when it hides more than it costs.
+
+Obscurity is important information that is not obvious — a generic name,
+a hidden dependency, an inconsistency. It leaves unknown unknowns: a
+reader cannot tell what a change will touch. Make that information
+obvious in the design and the names before adding a comment (see
+rules-of-engagement).
+
+Every rule below is a way to cut a dependency or an obscurity.
+
+- Eliminate special cases, and use the same name for the same idea every time.
+- Hide a feature in a module so a later reader can change it without
+  learning the rest of the system.
 - Prefer a design whose pieces can be understood one at a time.
 - Do not spread a single decision across many files.
 - Do not introduce a second pattern for a problem the repo already solved.
@@ -83,8 +103,20 @@ A codebase is a dialect. Speak it.
 
 - Match existing names, layering, and error style even if you prefer
   another school.
+- Inconsistency makes dependencies and behavior obscure.
 - A new abstraction must earn its keep: it removes duplication or hides a
   real secret, not just "we might need it."
+
+## 8. Leave the design better
+
+Complexity accumulates as small dependencies and obscurities. When a change
+touches a module, fix one of those you can name. Spend part of the change
+on that fix.
+
+## 9. Balance competing ideas
+
+A good design balances competing ideas and approaches. Do not take any
+design to its extreme — past that point the design gets worse.
 
 ## Applying these while coding
 
@@ -94,3 +126,5 @@ A codebase is a dialect. Speak it.
    opening the implementation.
 3. If the change fights the current architecture, stop and plan — do not
    paper over it with a helper in the wrong layer.
+4. Name any dependency or obscurity the change adds. Remove one small
+   dependency or obscurity in the code already touched.

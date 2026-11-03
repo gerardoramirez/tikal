@@ -1,7 +1,8 @@
 # Software Design Principles
 
 Stack-agnostic rules for shaping code. Agents load this whenever they write
-or change code. Language and framework layout live in
+or change code. How the programmer thinks lives in
+`processes/programmer-mindset.md`. Language and framework layout live in
 `stacks/<type>/architecture.md`. This file governs complexity and module
 design in every stack.
 
@@ -10,6 +11,7 @@ design in every stack.
 | Doc | Job |
 |---|---|
 | `processes/rules-of-engagement.md` | Collaboration, naming, comments, tests, errors, plans |
+| `processes/programmer-mindset.md` | How the programmer thinks |
 | `processes/design-principles.md` (this file) | Modules, interfaces, complexity, change |
 | `stacks/<type>/` | Framework and language conventions |
 
@@ -112,11 +114,6 @@ A codebase is a dialect. Speak it.
 Complexity accumulates as small dependencies and obscurities. When a change
 touches a module, fix one of those you can name. Spend part of the change
 on that fix.
-
-## 9. Balance competing ideas
-
-A good design balances competing ideas and approaches. Do not take any
-design to its extreme — past that point the design gets worse.
 
 ## Applying these while coding
 

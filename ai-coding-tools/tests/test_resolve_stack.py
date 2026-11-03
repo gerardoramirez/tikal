@@ -295,7 +295,17 @@ class ResolveStackTests(unittest.TestCase):
     def test_design_principles__lives_under_processes(self):
         path = Path(__file__).resolve().parent.parent / "processes" / "design-principles.md"
         self.assertTrue(path.is_file())
-        self.assertIn("Software Design Principles", path.read_text())
+        text = path.read_text()
+        self.assertIn("Software Design Principles", text)
+        self.assertIn("processes/programmer-mindset.md", text)
+        self.assertNotIn("Balance competing ideas", text)
+
+    def test_programmer_mindset__lives_under_processes(self):
+        path = Path(__file__).resolve().parent.parent / "processes" / "programmer-mindset.md"
+        self.assertTrue(path.is_file())
+        text = path.read_text()
+        self.assertIn("Programmer Mindset", text)
+        self.assertIn("Balance competing ideas", text)
 
 
 if __name__ == "__main__":

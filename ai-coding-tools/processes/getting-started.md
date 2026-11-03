@@ -21,6 +21,7 @@ Load only the docs that match this repository. Do not open other stacks.
 |---|---|
 | `tikal.project.md` | If it exists. Project-specific overview (commands, layout, architecture). |
 | `ai-coding-tools/processes/rules-of-engagement.md` | Always. Communication and code-style guardrails. |
+| `ai-coding-tools/processes/programmer-mindset.md` | Always. How the programmer thinks. |
 | `ai-coding-tools/processes/design-principles.md` | Always. Shared philosophy for shaping modules and APIs. |
 | `ai-coding-tools/stacks/<type>/index.md` then the files it lists | For **each** type in the **expanded** list that has a stack directory. |
 

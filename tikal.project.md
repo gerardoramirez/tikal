@@ -18,7 +18,7 @@ python3 ai-coding-tools/scripts/propose_commit_message.py
 
 ## Repository Structure
 
-- **ai-coding-tools/processes/** — stack-agnostic router, always-on design principles, and optional workflows
+- **ai-coding-tools/processes/** — stack-agnostic router, always-on programmer mindset and design principles, and optional workflows
 - **ai-coding-tools/stacks/** — per-type packs (loaded only when `tikal.yaml` lists them)
 - **ai-coding-tools/scripts/** — resolve, init, hooks, telemetry. `propose_commit_message.py` is a stop hook: with `auto_commit_message` on, it asks for one commit message and does not commit. It runs only after `.cursor/hooks.json`, a Claude `Stop` entry, or `.codex/hooks.json` registers it. `init_project.py` does not add that registration. See the README how-to.
 - **ai-coding-tools/templates/** — entrypoints copied into consuming repos

@@ -18,6 +18,7 @@ processes/getting-started.md   (always-on router)
         │
         ├── tikal.project.md                   (this app's overview)
         ├── processes/rules-of-engagement.md   (always)
+        ├── processes/programmer-mindset.md    (always)
         ├── processes/design-principles.md     (always)
         ├── stacks/typescript/                 (implied by astro)
         ├── stacks/astro/                      (only if listed)
@@ -45,7 +46,7 @@ If `tikal.yaml` is missing, Tikal infers types from markers (`pubspec.yaml` + a 
 python3 ai-coding-tools/scripts/resolve_stack.py
 ```
 
-Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and [code review](ai-coding-tools/processes/code-review.md). Design principles load with the router on every session.
+Optional process files load only when that work is happening: refactoring, benchmarking, [git commits](ai-coding-tools/processes/git.md), and [code review](ai-coding-tools/processes/code-review.md). Programmer mindset and design principles load with the router on every session.
 
 Tikal uses [Human Truth Driven Design](https://github.com/gerardoramirez/human-truth-driven-design) for HTDD. Agents follow the product's `docs/htdd/AGENTS.md` and `docs/htdd/MILESTONES/CURRENT.md` only when those files exist, and load `processes/htdd-gate.md` before implementation when `AGENTS.md` exists. Tikal does not ship the method.
 
@@ -179,6 +180,7 @@ That script only refuses unsafe paths. It does not `git add` or `git commit`.
 | `processes/getting-started.md` | Context router (always-on, small) |
 | `processes/project-overview.template.md` | Copied to a consuming repo as `tikal.project.md` |
 | `processes/rules-of-engagement.md` | Communication, complexity, and test standards |
+| `processes/programmer-mindset.md` | Always-on: how the programmer thinks |
 | `processes/design-principles.md` | Always-on philosophy for modules, interfaces, and change |
 | `processes/refactoring.md`, `benchmarking.md`, `git.md`, `code-review.md` | Optional workflows |
 | `processes/htdd-gate.md` | Before implementation, only when the product has `docs/htdd/AGENTS.md` |
@@ -242,6 +244,7 @@ Put that in `~/.claude/settings.json` or the project settings. Summaries stay on
 * Put an app's commands, layout, and architecture in that app's `tikal.project.md`, not in the router.
 * Put implementation plans in `plans/` at the **app** repo root.
 * Edit `ai-coding-tools/processes/rules-of-engagement.md` for start tokens, comments, and test naming.
+* Edit `ai-coding-tools/processes/programmer-mindset.md` for how the programmer thinks.
 * Edit `ai-coding-tools/processes/design-principles.md` for how agents should shape modules and APIs.
 * Add a stack as `ai-coding-tools/stacks/<type>/` (`index.md` plus focused docs), register it in `scripts/resolve_stack.py` and `scripts/init_project.py`, and list it in the app's `tikal.yaml`. See [stacks/README.md](ai-coding-tools/stacks/README.md).
 

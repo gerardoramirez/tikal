@@ -305,6 +305,8 @@ class ResolveStackTests(unittest.TestCase):
         self.assertTrue(path.is_file())
         text = path.read_text()
         self.assertIn("Programmer Mindset", text)
+        self.assertIn("Take a strategic approach", text)
+        self.assertIn("tactical mindset", text)
         self.assertIn("Balance competing ideas", text)
 
 

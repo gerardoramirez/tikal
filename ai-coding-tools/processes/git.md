@@ -1,6 +1,6 @@
 # Git commits
 
-Open this file when the user asked to commit (or to review what would be committed). Also open this path at the end of a task that changed files when `project.auto_commit_message` is true. This file lives on the `ai-coding-tools` link. Open the path even when a search of the app repo does not list it. The flag alone does not print a message. If the reply has no `## Proposed commit message` and the worktree is still dirty, the stop hook in the README how-to sends one follow-up, and only when that hook is installed.
+Open this file when the user asked to commit (or to review what would be committed). Also open this path at the end of a task that changed files when `project.auto_commit_message` is true. This file lives on the `ai-coding-tools` link. Open the path even when a search of the app repo does not list it. The flag alone does not print a message. If the reply has no `## Proposed commit message` and the worktree is still dirty, the stop hook in `docs/commits.md` sends one follow-up, and only when that hook is installed.
 
 Do not commit unless the user asked. This file is judgment, not a runner. Do not add a script that stages or commits for you.
 

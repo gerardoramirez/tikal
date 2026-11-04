@@ -11,6 +11,8 @@ Reusable instructions, workflows, and hooks for AI coding agents.
 ```bash
 python3 -m unittest discover -s ai-coding-tools/tests -v
 python3 ai-coding-tools/scripts/resolve_stack.py
+python3 ai-coding-tools/scripts/resolve_process.py code-review
+python3 ai-coding-tools/scripts/link_skills.py --root .
 python3 ai-coding-tools/scripts/init_project.py --type flutter --root /path/to/app
 python3 ai-coding-tools/scripts/commit_paths_ok.py --root . -- path1 path2
 python3 ai-coding-tools/scripts/propose_commit_message.py
@@ -20,11 +22,13 @@ python3 ai-coding-tools/scripts/propose_commit_message.py
 
 - **ai-coding-tools/processes/** — stack-agnostic router, always-on programmer mindset and design principles, and optional workflows
 - **ai-coding-tools/stacks/** — per-type packs (loaded only when `tikal.yaml` lists them)
-- **ai-coding-tools/scripts/** — resolve, init, hooks, telemetry. `propose_commit_message.py` is a stop hook: with `auto_commit_message` on, it asks for one commit message and does not commit. It runs only after `.cursor/hooks.json`, a Claude `Stop` entry, or `.codex/hooks.json` registers it. `init_project.py` does not add that registration. See the README how-to.
+- **ai-coding-tools/scripts/** — resolve, init, hooks, telemetry. `propose_commit_message.py` is a stop hook: with `auto_commit_message` on, it asks for one commit message and does not commit. It runs only after `.cursor/hooks.json`, a Claude `Stop` entry, or `.codex/hooks.json` registers it. `init_project.py` does not add that registration. `resolve_process.py` prints one process by id. `link_skills.py` symlinks skills and is opt-in. Hook files are in `docs/commits.md`. Process ids are in `docs/skills.md`.
+- **ai-coding-tools/skills/** — thin Claude and Cursor skills that call a process by id. The process file stays the workflow.
 - **ai-coding-tools/templates/** — entrypoints copied into consuming repos
 - **tikal.yaml** — stack allow-list for *this* checkout. `project.code_reviews` is the relative directory for review write-ups (`code-reviews` here). `auto_commit_message` stays off.
 - **tikal.project.md** — this file
 - **plans/** — implementation plans for this repo (not inside `ai-coding-tools/`)
+- **docs/** — pages for people: usage and the feature graphs. Agents do not load this directory.
 
 ## Development Guidelines
 

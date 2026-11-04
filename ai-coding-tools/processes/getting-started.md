@@ -28,6 +28,8 @@ Load only the docs that match this repository. Do not open other stacks.
 Do **not** read `ai-coding-tools/stacks/*` entries that are not in the
 expanded type list.
 
+Human documentation lives in `docs/` at the repository root; do not load it as agent context.
+
 Project plans live in `plans/` at the repository root. Do not create
 app files inside `ai-coding-tools/`.
 
